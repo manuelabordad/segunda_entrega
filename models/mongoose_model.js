@@ -11,28 +11,38 @@ class Product {
 			stock: { type: Number, default: 0 },
 			timestamp: { type: Number, default: Date.now() },
 		});
-
-		// modelo
-		// representacion en JS de nuestra collection en mongo
 		this.model = mongoose.model("product", schema);
 	}
 
 	async create(obj) {
-		// db.product.insertOne({}) -> mongoshell
 		const product = await this.model.create(obj);
 		console.log("--------------------");
 		console.log(JSON.stringify(product, null, 2));
 		return product;
 	}
 
-	// orderBy valor por default es string vacio
-	async getAll(orderBy = "", search = "") {}
+	async getAll() {
+		const products = await this.model.find();
+		console.log(`productos en ecommerce: ${products.length}`);
+		return products;
+	}
 
-	getById(id) {}
+	getById(id) {
+		const product = await this.model.findById(id);
+		return product;
+	}
 
-	update() {}
+	updateById(id, newP) {
+		const newProd = await this.model.findByIdAndUpdate(id, newP);
+		await this.model.save();
+		return newProd;
+	}
 
-	delete() {}
+	deleteById(id) {
+		const product = await this.model.findByIdAndDelete(id);
+		const newArray = await this.model.find();
+		return newArray;
+	}
 }
 
 module.exports = new Product();
