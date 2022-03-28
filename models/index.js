@@ -1,9 +1,11 @@
-const mongoose = require("./mongoose_model");
+const mongooseP = require("./mongo_prod");
+const mongooseC = require("./mongo_cart");
 const firebase = require("./firebase_model");
 const local = require("./local_model");
 
 module.exports = {
-	mongoose,
+	mongooseP,
+	mongooseC,
 	firebase,
 	local,
 };

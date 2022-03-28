@@ -3,7 +3,7 @@ const mongo = require("../models/index");
 module.exports = {
 	get: async (req, res) => {
 		try {
-			const products = await mongo.mongoose.getAll();
+			const products = await mongo.mongooseP.getAll();
 			res.send(products);
 		} catch (e) {
 			console.log(e);
@@ -15,7 +15,7 @@ module.exports = {
 	getById: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const byid = await mongo.mongoose.getById(id);
+			const byid = await mongo.mongooseP.getById(id);
 			res.send(byid);
 		} catch (e) {
 			console.log(e);
@@ -27,7 +27,7 @@ module.exports = {
 	put: async (req, res) => {
 		try {
 			const { id, body } = req.params;
-			const update = await mongo.mongoose.updateById(id, body);
+			const update = await mongo.mongooseP.updateById(id, body);
 			res.status(200).send("producto actualizado");
 		} catch (e) {
 			console.log(e);
@@ -37,9 +37,9 @@ module.exports = {
 		}
 	},
 	post: async (req, res) => {
-		const { body } = req;
 		try {
-			const product = await mongo.mongoose.create(body);
+			const { body } = req;
+			const product = await mongo.mongooseP.create(body);
 			res.status(200).send(product);
 		} catch (e) {
 			console.log(e);
@@ -51,7 +51,7 @@ module.exports = {
 	delete: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const product = await mongo.mongoose.deleteById(id);
+			const product = await mongo.mongooseP.deleteById(id);
 			res.status(200).send("producto eliminado ");
 		} catch (e) {
 			console.log(e);
