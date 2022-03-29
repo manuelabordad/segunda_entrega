@@ -4,6 +4,7 @@ class Cart {
 	constructor() {
 		const schema = new mongoose.Schema({
 			nombre: String,
+			productos: [String],
 			timestamp: { type: Number, default: Date.now() },
 		});
 		this.model = mongoose.model("cart", schema);
@@ -28,9 +29,12 @@ class Cart {
 	}
 
 	async deleteById(id, id_prod) {
-		const deleated = await this.model.findById(id).findOneAndDelete(id_prod);
-		const newCart = await this.model.findById(id);
-		return newCart;
+		const cart = await this.model.findById(id);
+		const productIndex = cart.productos.findIndex(
+			(product) => product.id == id_prod
+		);
+		cart.productos.splice(productIndex);
+		return cart;
 	}
 }
 
