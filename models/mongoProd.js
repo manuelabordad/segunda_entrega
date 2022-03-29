@@ -27,18 +27,18 @@ class Product {
 		return products;
 	}
 
-	getById(id) {
+	async getById(id) {
 		const product = await this.model.findById(id);
 		return product;
 	}
 
-	updateById(id, newP) {
+	async updateById(id, newP) {
 		const newProd = await this.model.findByIdAndUpdate(id, newP);
 		await this.model.save();
 		return newProd;
 	}
 
-	deleteById(id) {
+	async deleteById(id) {
 		const product = await this.model.findByIdAndDelete(id);
 		const newArray = await this.model.find();
 		return newArray;

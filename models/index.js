@@ -1,5 +1,5 @@
-const mongooseP = require("./mongo_prod");
-const mongooseC = require("./mongo_cart");
+const mongooseP = require("./mongoProd");
+const mongooseC = require("./mongoCart");
 const firebase = require("./firebase_model");
 const local = require("./local_model");
 
